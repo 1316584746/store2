@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mgb.dao.EmployeeMapper">
+
+    <insert id="save" parameterType="com.mgb.pojo.Employee">
+        insert  into  employee(e_id, e_idCard, e_name,
+                                e_rfid, e_password, e_sex, e_birthday,
+                                 e_phone, e_state, e_icon, e_level)
+            values (#{eId},#{eIdCard},#{eName},
+                   #{eRfid},#{ePassword},#{eSex},
+                   #{eBirthday},#{ePhone},#{eState},
+                    #{eIcon},#{eLevel})
+    </insert>
+
+    <!--商品的添加-->
+    <insert id="addgoods" parameterType="com.mgb.pojo.Goods">
+        insert  into goods(gNo,gtNo, gName,gDescript,gBarcode, gUnit,gPrice,gState,gCount,eId,exhibitTime)
+                values ( )
+    </insert>
+
+
+
+    <update id="uppassword" parameterType="com.mgb.pojo.Employee">
+        UPDATE employee SET e_password = #{epassword} WHERE e_phone=#{ephone}
+    </update>
+
+
+    <select id="findAll" resultType="com.mgb.pojo.Employee">
+        select * from employee;
+    </select>
+    <select id="findByname" resultType="com.mgb.pojo.Employee">
+          select  * from employee where  e_rfid=#{name} limit 1;
+    </select>
+    <select id="getEmpl" resultType="com.mgb.pojo.Employee">
+        select * from employee  where  e_level=#{level} order by e_id desc limit 1;
+    </select>
+
+</mapper>
